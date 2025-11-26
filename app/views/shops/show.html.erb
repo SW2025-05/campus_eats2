@@ -1,0 +1,15 @@
+<h1><%= @shop.name %></h1>
+<p><%= @shop.description %></p>
+<p>⭐<%= @shop.rating %></p>
+
+<h2>口コミ一覧</h2>
+<% @reviews.each do |review| %>
+  <p><strong><%= review.user.name %></strong>: <%= review.content %> ⭐<%= review.rating %></p>
+<% end %>
+
+<h3>口コミ投稿</h3>
+<%= form_with model: [@shop, Review.new], local: true do |f| %>
+  <%= f.text_area :content %>
+  <%= f.number_field :rating, in: 1..5 %>
+  <%= f.submit "投稿" %>
+<% end %>

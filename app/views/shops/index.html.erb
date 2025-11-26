@@ -1,0 +1,94 @@
+<!-- app/views/shops/index.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>近飯！</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= stylesheet_link_tag "shops", "data-turbo-track": "reload" %>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">近飯！</div>
+    <div class="header-sub">KIND MESHI — 近大生のためのグルメガイド</div>
+  </header>
+
+  <main class="container">
+    <!-- 検索バー -->
+    <section class="search-wrap">
+      <%= form_with url: shops_path, method: :get, local: true, class: "search-form" do %>
+        <%= text_field_tag :keyword, params[:keyword], placeholder: "店名で検索...（例：カフェ／ラーメン）", class: "search-input" %>
+        <%= submit_tag "検索", class: "search-btn" %>
+      <% end %>
+    </section>
+
+    <!-- 店舗カードグリッド -->
+    <section class="shop-grid">
+      <% @shops.each do |shop| %>
+        <article class="shop-card">
+          <% if shop.recommended %>
+            <div class="badge">おすすめ</div>
+          <% end %>
+
+          <!-- 画像 -->
+          <div class="shop-image-wrap">
+            <% case shop.name %>
+            <% when "かやの森cafe" %>
+              <%= image_tag "cafe.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "Joyfull" %>
+              <%= image_tag "joyfull.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "モスバーガー" %>
+              <%= image_tag "mos.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "ピザハット" %>
+              <%= image_tag "shop1.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "スシロー" %>
+              <%= image_tag "susiro.png", alt: shop.name, class: "shop-image" %>
+
+                        <% when "どんどん亭" %>
+              <%= image_tag "dondon.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "とんかつ濵かつ" %>
+              <%= image_tag "hamakatu.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "ジョリーパスタ" %>
+              <%= image_tag "pasta.png", alt: shop.name, class: "shop-image" %>
+
+            <% when "炭火焼肉嘉苑" %>
+              <%= image_tag "yakiniku.png", alt: shop.name, class: "shop-image" %>
+
+            <% else %>
+              <%= image_tag "shop1.png", alt: shop.name, class: "shop-image" %>
+            <% end %>
+          </div>
+
+          <!-- 店舗情報 -->
+          <div class="shop-body">
+            <h3 class="shop-title"><%= shop.name %></h3>
+            <p class="shop-desc"><%= truncate(shop.description.to_s, length: 120) %></p>
+
+            <!-- 評価 -->
+            <div class="stars" aria-label="rating">
+              <% rating = (shop.rating || 0).to_i.clamp(0,5) %>
+              <% 5.times do |i| %>
+                <% if i < rating %>
+                  <span class="star filled">★</span>
+                <% else %>
+                  <span class="star">☆</span>
+                <% end %>
+              <% end %>
+            </div>
+
+            <!-- アクションボタン -->
+            <div class="actions">
+              <%= link_to "詳細を見る", shop_path(shop), class: "btn detail" %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </section>
+  </main>
+</body>
+</html>
