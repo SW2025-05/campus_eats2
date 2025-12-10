@@ -74,6 +74,8 @@ Rails.application.configure do
   # Cloud9 用ホスト許可
   # Blocked hosts エラーを回避するために追加
   config.hosts << "df6dcd7ae6384e5ca02cefc04c59d8a5.vfs.cloud9.us-east-1.amazonaws.com"
+  # config/environments/development.rb
+config.hosts << "11025aba3e2242f099e630e990e9abea.vfs.cloud9.us-east-1.amazonaws.com"
   # 開発中にすべてのホストを許可する場合は以下でも可
   # config.hosts.clear
   # --------------------------------------------------------
