@@ -21,7 +21,10 @@ gem 'devise'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
-gem 'sqlite3', '>= 2.1'
+gem "sqlite3" , ">= 2.1", group: :development
+group :production do # <--- ★代わりに、productionグループ内にpgを移動します
+  gem "pg", "~> 1.1"
+end
 gem 'bcrypt', '~> 3.1.7'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

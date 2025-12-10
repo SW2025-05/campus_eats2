@@ -23,3 +23,12 @@ cable:
   production:
     adapter: postgresql
     url: <%= ENV['DATABASE_URL'] %>
+ primary: &primary_production
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: oursite
+  username: oursite_user
+  password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
