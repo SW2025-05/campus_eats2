@@ -25,7 +25,7 @@ gem "sqlite3" , ">= 2.1", group: :development
 group :production do # <--- ★代わりに、productionグループ内にpgを移動します
   gem "pg", "~> 1.1"
 end
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.21'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
